@@ -128,7 +128,7 @@ const deletePost = (id: number) => {
                                 {{ user?.role?.name || "None" }}</td>
                             <td
                                 class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                <img :src="`/storage/${user.profile_image}`" alt="Profile Image" />
+                                <img :src="`/storage/${user.profile_image}`" class="h-20" alt="Profile Image" />
                             </td>
 
                             <td
