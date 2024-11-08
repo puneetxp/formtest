@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -20,13 +21,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/user', [UserController::class, 'edit'])->name('user.edit');
-    Route::post('/user', [UserController::class, 'store'])->name('user.store');
-    Route::delete('/user', [UserController::class, 'destroy'])->name('user.destroy');
-});
-Route::middleware('auth')->group(function () {
+    Route::resource('role', RoleController::class);
+    Route::resource('user', UserController::class);
+    Route::get('/storage/profile_images/{profile_image}', [UserController::class, 'profile']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
