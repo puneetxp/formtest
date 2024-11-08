@@ -28,6 +28,14 @@ composer run dev
 composer run dev
 ```
 
+
+### Error
+
+There will be some error in  The [pcntl] extension is required to run Pail. please 
+for run code run this script 
+This error don't effect you can ignore this.
+
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
