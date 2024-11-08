@@ -12,6 +12,7 @@
 this is cmd please close run dev then run composer run  dev
 
 ### Setup
+
 ```bash
 composer install
 cp .env.example .env
@@ -27,7 +28,18 @@ composer run dev
 ```bash
 composer run dev
 ```
+### You need to register first 
 
+you need to goto role
+
+http://localhost:8000/register
+
+
+### For create new user you need to create a new role
+
+you need to goto role
+
+http://localhost:8000/role
 
 ### Error
 
