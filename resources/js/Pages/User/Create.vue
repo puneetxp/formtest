@@ -122,7 +122,7 @@ const handleFileUpload = async (event: Event) => {
                     <InputError class="mt-2" :message="form.errors.description" />
                 </div>
                 <PrimaryButton class="ms-4 my-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Create
                 </PrimaryButton>
             </form>
         </div>

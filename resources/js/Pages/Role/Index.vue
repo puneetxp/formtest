@@ -47,7 +47,7 @@ const deleteRole = (id: number) => {
                 </Link>
             </div>
         </template>
-        <div class="dark:text-white">
+        <div class="dark:text-white overflow-x-auto">
             <div v-if="errors.length">
                 <ul>
                     <li v-for="error in errors" :key="error">{{ error }}</li>

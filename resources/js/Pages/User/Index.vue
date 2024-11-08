@@ -50,7 +50,7 @@ const handleFileUpload = async (event: Event) => {
 const delForm = useForm({});
 
 const deletePost = (id: number) => {
-    form.delete(`posts/${id}`);
+    form.delete(`user/${id}`);
 };
 </script>
 
@@ -68,7 +68,7 @@ const deletePost = (id: number) => {
                 </Link>
             </div>
         </template>
-        <div class="dark:text-white">
+        <div class="dark:text-white overflow-x-auto">
             <div v-if="errors.length">
                 <ul>
                     <li v-for="error in errors" :key="error">{{ error }}</li>

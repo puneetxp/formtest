@@ -13,8 +13,9 @@ use Inertia\Response;
 
 class UserController extends Controller
 {
-    public function profile(string $link) {
-        return Storage::download("profile_images/".$link);
+    public function profile(string $link)
+    {
+        return Storage::download("profile_images/" . $link);
     }
     public function index(Request $request, User $user, role $role): Response
     {
@@ -40,11 +41,35 @@ class UserController extends Controller
         return Inertia::render('User/Edit', [
             'mustVerifyEmail' => $request->user() instanceof MustVerifyEmail,
             'status' => session('status'),
-            'users' => $user,
+            'user' => $user,
             'roles' => Role::all()
         ]);
     }
+    public function update(Request $request, User $user)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'password' => 'required',
+            'email' => 'required|email:users,email',
+            'phone' => 'required|regex:/^[6-9]\d{9}$/',
+            'description' => 'nullable|string',
+            'role_id' => 'required|integer|exists:roles,id'
+        ]);
+        if ($request->profile_image && is_string($request->profile_image )) {
+            $validated['profile_image'] = $request->validate([
+                'profile_image' => 'required|image|mimes:jpg,jpeg,svg,png|max:2048'
+            ]);
+        }
+        // $validated['phone'] = "+91" . $validated['phone'];
+        $validated["pasword"] = Hash::make($validated['password']);
+        $user->update($validated);
 
+        if ($request->hasFile('profile_image')) {
+            $path = $request->file('profile_image')->store('profile_images');
+            $user->update(["profile_image" => $path]);
+        }
+        return redirect()->route('user.index');
+    }
     public function store(Request $request)
     {
         $validated = $request->validate([
@@ -69,22 +94,9 @@ class UserController extends Controller
 
         return redirect()->route('user.index');
     }
-    public function destroy(Request $request)
+    public function destroy(User $user)
     {
-        $request->validate([
-            'password' => ['required', 'current_password'],
-        ]);
-
-        $user = $request->user();
-
         $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return response()->json([
-            'success' => true,
-            'user' => 0
-        ]);
+        return redirect()->back();
     }
 }

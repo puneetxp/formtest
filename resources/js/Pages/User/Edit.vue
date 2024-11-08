@@ -9,33 +9,37 @@ import { Head, useForm } from '@inertiajs/vue3';
 
 import { reactive, ref } from 'vue';
 const props = defineProps<{
-    user?: { name: string, id: number, email: string, phone: string, description: string, profile_image: string, role_id: string }[];
+    user: { name: string, id: number, email: string, phone: string, description: string, profile_image: string, role_id: string }[];
     roles?: { name: String, id: number }[];
     mustVerifyEmail?: boolean;
     status?: string;
 }>();
 
 const form = useForm({
-    name: props.user?.name || '',
-    email: props.user?.email || '',
-    phone: props.user?.phone || '',
-    description: props.user?.description || '',
-    role_id: props.user?.role_id || '',
+    id: props.user.id || '',
+    name: props.user.name || '',
+    email: props.user.email || '',
+    phone: props.user.phone || '',
+    password: 'p@sswor1d',
+    description: props.user.description || '',
+    role_id: props.user.role_id || '',
     profile_image: File,
 });
 
 const submit = () => {
-    form.patch(route('user.update'), {
+    form.patch(route('user.update', props.user.id), {
         onFinish: () => {
         },
     });
 };
 
 
-let preview: string | null = null;
+
 
 
 const state = reactive({ preview: '' })
+
+state.preview = "/storage/"+props.user.profile_image;
 const handleFileUpload = async (event: Event) => {
     const target = event.target as HTMLInputElement;
     if (target && target.files) {
@@ -121,7 +125,7 @@ const handleFileUpload = async (event: Event) => {
                     <InputError class="mt-2" :message="form.errors.description" />
                 </div>
                 <PrimaryButton class="ms-4 my-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
+                    Update
                 </PrimaryButton>
             </form>
         </div>
