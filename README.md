@@ -6,9 +6,27 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+
 ## Run this Project
+this is cmd please close run dev then run composer run  dev
+
+### Setup
+```bash
 composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate # create new sqllite file
+npm i
+npm run dev 
 composer run dev
+```
+
+### Run 
+
+```bash
+composer run dev
+```
 
 ## About Laravel
 

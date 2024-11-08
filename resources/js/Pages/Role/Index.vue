@@ -54,7 +54,7 @@ const deleteRole = (id: number) => {
                 </ul>
             </div>
             <div v-if="roles && roles.length">
-                <table class="border-collapse table-auto w-full text-sm p-4 mt-3">
+                <table class="border-collapse table-auto w-full text-sm mt-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <thead>
                         <tr>
                             <th

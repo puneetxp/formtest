@@ -61,20 +61,23 @@ const handleFileUpload = async (event: Event) => {
         </template>
         <div class="container m-auto w-96 mt-5">
             <form @submit.prevent="submit">
-                <div v-if="state.preview == ''" class="w-24 h-24 text-center dark:text-white border-1 m-auto"
+                <div class="border">
+                <div v-if="state.preview == ''" class="w-24 h-24 text-center dark:text-white border-1 m-auto flex content-center"
                     v-on:click="$refs.x.click()">
-                    Select Image
+                    <span class="m-auto">
+                        Select Image</span>
                 </div>
-                <div v-if="state.preview !== ''" class="w-24 h-24 text-center dark:text-white border-1 m-auto"
+                <div v-if="state.preview !== ''" class="w-24 h-24 text-center dark:text-white border-1 m-auto flex content-center"
                     v-on:click="$refs.x.click()">
                     <img :src="state.preview" />
                 </div>
                 <InputError class="mt-2" :message="form.errors.profile_image" />
 
-                <input ref="x" class="hidden" type="file" @input="handleFileUpload($event)" />
+                <input ref="x" class="hidden" type="file" @input="handleFileUpload($event)" accept=".jpg, .jpeg, .svg, .png" />
                 <progress v-if="form.progress" :value="form.progress.percentage" max="100">
                     {{ form.progress.percentage }}%
                 </progress>
+            </div>
                 <div>
                     <InputLabel for="name" value="Name" />
 
