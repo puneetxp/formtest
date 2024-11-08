@@ -8,7 +8,7 @@ import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
 import { reactive, ref } from 'vue';
 defineProps<{
-    users?: { name: string, id: number, email: string, phone: string, description: string, profile_image: string, role_id: string }[];
+    users?:  { name: string, id: number, email: string, phone: string, description: string, profile_image: string, role_id: string, role: { name: String, id: number } } [];
     roles?: { name: String, id: number }[];
     mustVerifyEmail?: boolean;
     status?: string;
@@ -19,6 +19,7 @@ const form = useForm({
     name: '',
     email: '',
     phone: '',
+    password: 'p@sswor1d',
     description: '',
     role_id: '',
     profile_image: File,
@@ -75,7 +76,7 @@ const deletePost = (id: number) => {
                 </ul>
             </div>
             <div v-if="users && users.length">
-                <table class="border-collapse table-auto w-full text-sm p-4 mt-3">
+                <table class="border-collapse table-auto w-full text-sm mt-3 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <thead>
                         <tr>
                             <th
@@ -124,7 +125,7 @@ const deletePost = (id: number) => {
                                 {{ user.description }}</td>
                             <td
                                 class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
-                                {{ user.role_id }}</td>
+                                {{ user?.role?.name || "None" }}</td>
                             <td
                                 class="border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400">
                                 <img :src="`/storage/${user.profile_image}`" alt="Profile Image" />

@@ -9,7 +9,7 @@ import { Head, useForm } from '@inertiajs/vue3';
 
 import { reactive, ref } from 'vue';
 const props = defineProps<{
-    user: { name: string, id: number, email: string, phone: string, description: string, profile_image: string, role_id: string }[];
+    user: { name: string, id: number, email: string, phone: string, description: string, profile_image: string, role_id: string, role: { name: String, id: number } };
     roles?: { name: String, id: number }[];
     mustVerifyEmail?: boolean;
     status?: string;
@@ -27,7 +27,7 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.patch(route('user.update', props.user.id), {
+    form.post(route('user.update', props.user.id), {
         onFinish: () => {
         },
     });
@@ -89,7 +89,7 @@ const handleFileUpload = async (event: Event) => {
                 <div class="mt-4">
                     <InputLabel for="email" value="Email" />
 
-                    <TextInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required />
+                    <TextInput id="email" type="email" class="mt-1 block w-full" disable v-model="form.email" required />
 
                     <InputError class="mt-2" :message="form.errors.email" />
                 </div>
